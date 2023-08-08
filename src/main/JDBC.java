@@ -502,6 +502,7 @@ public class JDBC {
 					int bookingchoice = scan.nextInt();
 					if(bookingchoice == 1) {
 						Bookings.cancelBooking(username, bookingIDs[choice-1]);
+						System.out.println("\nCancellation complete! Returning you to the bookings page.\n");
 					} else if(bookingchoice != 2) {
 						System.out.println("\nInvalid Choice!");
 					}

@@ -139,7 +139,7 @@ public class Reports {
 		              + " Bookings.cancelled = 1 GROUP BY Listings.owner ORDER BY c DESC");
 			ResultSet rs2 = ps2.executeQuery();
 			if(rs2.next()) {
-				System.out.println("\nHost with the most cancellations: "+rs.getString(1)+"\t Number of Cancellations: "+rs.getInt(2));
+				System.out.println("\nHost with the most cancellations: "+rs2.getString(1)+"\t Number of Cancellations: "+rs2.getInt(2));
 			}
 			
 			return;
@@ -181,7 +181,8 @@ public class Reports {
 			int i = 1;
 			System.out.println("\n\nReport of Ranking Hosts Based on Listings Per Country");
 			while(rs.next()) {
-				System.out.println("\n"+i+": "+rs.getString(1)+"\t Country: "+rs.getString(2)+" Number of Listings: "+rs.getInt(3));
+				System.out.println("\n"+i+": "+rs.getString(1)+"\t Country: "+rs.getString(2)+"\t Number of Listings: "+rs.getInt(3));
+				i++;
 			}
 			return;
 		} catch(Exception e) {

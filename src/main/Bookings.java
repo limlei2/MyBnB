@@ -39,7 +39,7 @@ public class Bookings {
 		
 		try {
 			Connection con = Connect.ConnectDB();
-			String query = "SELECT bookingstart, bookingend FROM Bookings WHERE listingID = "+listingID;
+			String query = "SELECT bookingstart, bookingend FROM Bookings WHERE listingID = "+listingID+" AND cancelled = 0";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			
@@ -101,8 +101,8 @@ public class Bookings {
 	public static void printBookingWithID(String username, int bookingID) {
 		try {
 			Connection con = Connect.ConnectDB();
-			String query = "SELECT address, postal, city, country, "
-					+ "price, bookingstart, bookingend FROM Bookings INNER JOIN Listings "
+			String query = "SELECT Listings.address, Listings.postal, Listings.city, Listings.country, "
+					+ "Bookings.price, Bookings.bookingstart, Bookings.bookingend FROM Bookings INNER JOIN Listings "
 					+ "ON Bookings.listingID = Listings.listingID "
 					+ "WHERE booker = '"+username+"' AND bookingID = " + bookingID;
 			Statement stmt = con.createStatement();
@@ -116,7 +116,7 @@ public class Bookings {
 				Date startdate = new Date (rs.getDate(6).getTime());
 				Date enddate = new Date (rs.getDate(7).getTime());
 				System.out.println("Listing info: "+address+", "+postal+", "+city+", "+country
-						+ "\n\tPrice: $"+price+"\tStart Date: "+startdate+"\tEnd Date: "+enddate);
+						+ "\n\tPrice: $"+price+"\tStart Date: "+new java.sql.Date(startdate.getTime())+"\tEnd Date: "+new java.sql.Date(enddate.getTime()));
 			}
 			return;
 		} catch(Exception e) {
